@@ -160,7 +160,7 @@ services:
     command: bash -c "sleep 2m && /spark/sbin/start-thriftserver.sh && tail -f /spark/logs/spark--org.apache.spark.sql.hive.thriftserver.HiveThriftServer2-*.out"
   #  ================================== StreamSets DataCollector ========================================== #
   streamsets-1:
-    image: streamsets/datacollector:3.22.1
+    image: streamsets/datacollector:3.18.0
     container_name: streamsets-1
     hostname: streamsets-1
     labels:
