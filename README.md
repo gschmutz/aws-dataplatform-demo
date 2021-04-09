@@ -12,11 +12,9 @@ Create the bucket `tweet-bucket` in AWS S3.
 
 <https://confluent.cloud/login>
 
-Sign in as: `schmutz68@gmail.com`
-
 Create a cluster with the following topics:
 
-* `tweet-raw-v1`
+* `tweet_raw_v1`
 
 ### StreamSets Data Flow
 
