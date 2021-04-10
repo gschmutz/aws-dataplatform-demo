@@ -24,6 +24,16 @@ services:
     env_file:
       - ./conf/hadoop.env
     environment:
+      CORE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      CORE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      HIVE_SITE_CONF_fs_s3a_access_key: ${PLATYS_AWS_ACCESS_KEY:?PLATYS_AWS_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_secret_key: ${PLATYS_AWS_SECRET_ACCESS_KEY:?PLATYS_AWS_SECRET_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_endpoint: s3.amazonaws.com
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_path_style_access: 'False'
       SPARK_PUBLIC_DNS: ${PUBLIC_IP}
       INIT_DAEMON_STEP: setup_spark
       MASTER: spark://spark-master:7077
@@ -33,8 +43,8 @@ services:
       SPARK_DEFAULTS_CONF_spark_jars:
       SPARK_DEFAULTS_CONF_spark_jars_ivySettings:
       SPARK_DEFAULTS_CONF_spark_sql_catalogImplementation: in-memory
-      CORE_CONF_fs_defaultFS: file:///tmp
-      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: file:///hive/warehouse
+      CORE_CONF_fs_defaultFS: s3a://admin-bucket
+      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: s3a://admin-bucket/hive/warehouse
       SPARK_DEFAULTS_CONF_spark_yarn_dist_files: /spark/conf/hive-site.xml
       SPARK_DEFAULTS_CONF_spark_driver_extraJavaOptions:
       SPARK_DEFAULTS_CONF_spark_executor_extraJavaOptions:
@@ -58,14 +68,24 @@ services:
       SPARK_WORKER_WEBUI_PORT: '28111'
       SPARK_WORKER_OPTS: -Dspark.worker.cleanup.enabled=true
       SPARK_PUBLIC_DNS: ${PUBLIC_IP}
+      CORE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      CORE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      HIVE_SITE_CONF_fs_s3a_access_key: ${PLATYS_AWS_ACCESS_KEY:?PLATYS_AWS_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_secret_key: ${PLATYS_AWS_SECRET_ACCESS_KEY:?PLATYS_AWS_SECRET_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_endpoint: s3.amazonaws.com
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_path_style_access: 'False'
       SPARK_DEFAULTS_CONF_spark_jars_repositories:
       SPARK_DEFAULTS_CONF_spark_jars_packages: org.apache.spark:spark-avro_2.12:3.0.1
       SPARK_DEFAULTS_CONF_spark_jars_excludes:
       SPARK_DEFAULTS_CONF_spark_jars:
       SPARK_DEFAULTS_CONF_spark_jars_ivySettings:
       SPARK_DEFAULTS_CONF_spark_sql_catalogImplementation: in-memory
-      CORE_CONF_fs_defaultFS: file:///tmp
-      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: file:///hive/warehouse
+      CORE_CONF_fs_defaultFS: s3a://admin-bucket
+      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: s3a://admin-bucket/hive/warehouse
       SPARK_DEFAULTS_CONF_spark_yarn_dist_files: /spark/conf/hive-site.xml
       SPARK_DEFAULTS_CONF_spark_driver_extraJavaOptions:
       SPARK_DEFAULTS_CONF_spark_executor_extraJavaOptions:
@@ -89,14 +109,24 @@ services:
       SPARK_WORKER_WEBUI_PORT: '28112'
       SPARK_WORKER_OPTS: -Dspark.worker.cleanup.enabled=true
       SPARK_PUBLIC_DNS: ${PUBLIC_IP}
+      CORE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      CORE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      HIVE_SITE_CONF_fs_s3a_access_key: ${PLATYS_AWS_ACCESS_KEY:?PLATYS_AWS_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_secret_key: ${PLATYS_AWS_SECRET_ACCESS_KEY:?PLATYS_AWS_SECRET_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_endpoint: s3.amazonaws.com
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_path_style_access: 'False'
       SPARK_DEFAULTS_CONF_spark_jars_repositories:
       SPARK_DEFAULTS_CONF_spark_jars_packages: org.apache.spark:spark-avro_2.12:3.0.1
       SPARK_DEFAULTS_CONF_spark_jars_excludes:
       SPARK_DEFAULTS_CONF_spark_jars:
       SPARK_DEFAULTS_CONF_spark_jars_ivySettings:
       SPARK_DEFAULTS_CONF_spark_sql_catalogImplementation: in-memory
-      CORE_CONF_fs_defaultFS: file:///tmp
-      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: file:///hive/warehouse
+      CORE_CONF_fs_defaultFS: s3a://admin-bucket
+      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: s3a://admin-bucket/hive/warehouse
       SPARK_DEFAULTS_CONF_spark_yarn_dist_files: /spark/conf/hive-site.xml
       SPARK_DEFAULTS_CONF_spark_driver_extraJavaOptions:
       SPARK_DEFAULTS_CONF_spark_executor_extraJavaOptions:
@@ -124,9 +154,12 @@ services:
       SPARK_DEFAULTS_CONF_spark_jars_packages: org.apache.spark:spark-avro_2.12:3.0.1
       SPARK_DEFAULTS_CONF_spark_jars_excludes:
       SPARK_DEFAULTS_CONF_spark_jars_ivySettings:
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_endpoint: s3.amazonaws.com
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_path_style_access: 'False'
       SPARK_DEFAULTS_CONF_spark_sql_catalogImplementation: in-memory
-      CORE_CONF_fs_defaultFS: file:///tmp
-      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: file:///hive/warehouse
+      CORE_CONF_fs_defaultFS: s3a://admin-bucket
+      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: s3a://admin-bucket/hive/warehouse
       SPARK_DEFAULTS_CONF_spark_yarn_dist_files: /spark/conf/hive-site.xml
       SPARK_DEFAULTS_CONF_spark_driver_extraJavaOptions:
       SPARK_DEFAULTS_CONF_spark_executor_extraJavaOptions:
@@ -143,14 +176,24 @@ services:
     env_file:
       - ./conf/hadoop.env
     environment:
+      CORE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      CORE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      HIVE_SITE_CONF_fs_s3a_access_key: ${PLATYS_AWS_ACCESS_KEY:?PLATYS_AWS_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_secret_key: ${PLATYS_AWS_SECRET_ACCESS_KEY:?PLATYS_AWS_SECRET_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_endpoint: s3.amazonaws.com
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_path_style_access: 'False'
       SPARK_DEFAULTS_CONF_spark_jars_repositories:
       SPARK_DEFAULTS_CONF_spark_jars_packages: org.apache.spark:spark-avro_2.12:3.0.1
       SPARK_DEFAULTS_CONF_spark_jars_excludes:
       SPARK_DEFAULTS_CONF_spark_jars:
       SPARK_DEFAULTS_CONF_spark_jars_ivySettings:
       SPARK_DEFAULTS_CONF_spark_sql_catalogImplementation: in-memory
-      CORE_CONF_fs_defaultFS: file:///tmp
-      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: file:///hive/warehouse
+      CORE_CONF_fs_defaultFS: s3a://admin-bucket
+      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: s3a://admin-bucket/hive/warehouse
       SPARK_DEFAULTS_CONF_spark_yarn_dist_files: /spark/conf/hive-site.xml
       SPARK_DEFAULTS_CONF_spark_driver_extraJavaOptions:
       SPARK_DEFAULTS_CONF_spark_executor_extraJavaOptions:
@@ -160,7 +203,7 @@ services:
     command: bash -c "sleep 2m && /spark/sbin/start-thriftserver.sh && tail -f /spark/logs/spark--org.apache.spark.sql.hive.thriftserver.HiveThriftServer2-*.out"
   #  ================================== StreamSets DataCollector ========================================== #
   streamsets-1:
-    image: streamsets/datacollector:3.18.0
+    image: streamsets/datacollector:3.18.1
     container_name: streamsets-1
     hostname: streamsets-1
     labels:
@@ -210,14 +253,31 @@ services:
     env_file:
       - ./conf/hadoop.env
     environment:
+      CORE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      CORE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_endpoint: s3.amazonaws.com
+      HIVE_SITE_CONF_fs_s3a_access_key: ${PLATYS_AWS_ACCESS_KEY:?PLATYS_AWS_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_secret_key: ${PLATYS_AWS_SECRET_ACCESS_KEY:?PLATYS_AWS_SECRET_ACCESS_KEY must be set either in .env or as an environment variable}
+      HIVE_SITE_CONF_fs_s3a_path_style_access: 'False'
+      HIVE_SITE_CONF_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_endpoint: s3.amazonaws.com
+      SPARK_DEFAULTS_CONF_spark_hadoop_fs_s3a_path_style_access: 'False'
+      SPARK_HADOOP_FS_S3A_ACCESS_KEY: ${PLATYS_AWS_ACCESS_KEY:?PLATYS_AWS_ACCESS_KEY must be set either in .env or as an environment variable}
+      SPARK_HADOOP_FS_S3A_SECRET_KEY: ${PLATYS_AWS_SECRET_ACCESS_KEY:?PLATYS_AWS_SECRET_ACCESS_KEY must be set either in .env or as an environment variable}
+      # for awscli & s3cmd
+      AWS_ACCESS_KEY_ID: ${PLATYS_AWS_ACCESS_KEY:?PLATYS_AWS_ACCESS_KEY must be set either in .env or as an environment variable}
+      AWS_SECRET_ACCESS_KEY: ${PLATYS_AWS_SECRET_ACCESS_KEY:-bKhWxVF3kQoLY9kFmt91l+tDrEoZjqnWXzY9Eza}
+      AWS_ENDPOINT: s3.amazonaws.com
+      AWS_DEFAULT_REGION: eu-central-1
       SPARK_DEFAULTS_CONF_spark_jars_repositories:
       SPARK_DEFAULTS_CONF_spark_jars_packages: org.apache.spark:spark-avro_2.12:3.0.1
       SPARK_DEFAULTS_CONF_spark_jars_excludes:
       SPARK_DEFAULTS_CONF_spark_jars:
       SPARK_DEFAULTS_CONF_spark_jars_ivySettings:
       SPARK_DEFAULTS_CONF_spark_sql_catalogImplementation: in-memory
-      CORE_CONF_fs_defaultFS: file:///tmp
-      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: file:///hive/warehouse
+      CORE_CONF_fs_defaultFS: s3a://admin-bucket
+      SPARK_DEFAULTS_CONF_spark_sql_warehouse_dir: s3a://admin-bucket/hive/warehouse
       SPARK_DEFAULTS_CONF_spark_yarn_dist_files: /spark/conf/hive-site.xml
       SPARK_DEFAULTS_CONF_spark_driver_extraJavaOptions:
       SPARK_DEFAULTS_CONF_spark_executor_extraJavaOptions:
