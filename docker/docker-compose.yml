@@ -10,7 +10,7 @@ networks:
 services:
   #  ================================== Apache Spark 2.x ========================================== #
   spark-master:
-    image: trivadis/apache-spark-master:2.4.7-hadoop2.8
+    image: trivadis/apache-spark-master:3.0.1-hadoop3.2
     container_name: spark-master
     hostname: spark-master
     labels:
@@ -54,7 +54,7 @@ services:
       - ./container-volume/spark/logs/:/var/log/spark/logs
     restart: unless-stopped
   spark-worker-1:
-    image: trivadis/apache-spark-worker:2.4.7-hadoop2.8
+    image: trivadis/apache-spark-worker:3.0.1-hadoop3.2
     container_name: spark-worker-1
     hostname: spark-worker-1
     depends_on:
@@ -95,7 +95,7 @@ services:
       - ./container-volume/spark/logs/:/var/log/spark/logs
     restart: unless-stopped
   spark-worker-2:
-    image: trivadis/apache-spark-worker:2.4.7-hadoop2.8
+    image: trivadis/apache-spark-worker:3.0.1-hadoop3.2
     container_name: spark-worker-2
     hostname: spark-worker-2
     depends_on:
@@ -136,7 +136,7 @@ services:
       - ./container-volume/spark/logs/:/var/log/spark/logs
     restart: unless-stopped
   spark-history:
-    image: trivadis/apache-spark-worker:2.4.7-hadoop2.8
+    image: trivadis/apache-spark-worker:3.0.1-hadoop3.2
     command: /spark/bin/spark-class org.apache.spark.deploy.history.HistoryServer
     container_name: spark-history
     hostname: spark-history
@@ -169,7 +169,7 @@ services:
       - ./container-volume/spark/logs/:/var/log/spark/logs
     restart: unless-stopped
   spark-thrift-server:
-    image: trivadis/apache-spark-master:2.4.7-hadoop2.8
+    image: trivadis/apache-spark-master:3.0.1-hadoop3.2
     container_name: spark-thrift-server
     ports:
       - 28118:10000
@@ -239,7 +239,7 @@ services:
     restart: unless-stopped
   #  ================================== Zeppelin ========================================== #
   zeppelin:
-    image: trivadis/apache-zeppelin:0.9.0-spark2.4-hadoop2.8
+    image: trivadis/apache-zeppelin:0.9.0-spark3.0-hadoop3.2
     container_name: zeppelin
     hostname: zeppelin
     labels:
