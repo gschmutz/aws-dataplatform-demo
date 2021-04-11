@@ -5,10 +5,10 @@
   <version>1.0-SNAPSHOT</version>
   <inceptionYear>2020</inceptionYear>
   <properties>
-    <scala.version>2.11.12</scala.version>
-    <scala.compat.version>2.11.12</scala.compat.version>
-    <scala.binary.version>2.11</scala.binary.version>
-    <spark.version>2.4.5</spark.version>
+    <scala.version>2.12.12</scala.version>
+    <scala.compat.version>2.12.12</scala.compat.version>
+    <scala.binary.version>2.12</scala.binary.version>
+    <spark.version>3.0.1</spark.version>
   </properties>
 
   <repositories>
@@ -40,7 +40,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-avro_2.11</artifactId>
+      <artifactId>spark-avro_2.12</artifactId>
       <version>${spark.version}</version>
     </dependency>
     <dependency>
@@ -50,15 +50,17 @@
     </dependency>
     <dependency>
       <groupId>io.delta</groupId>
-      <artifactId>delta-core_2.11</artifactId>
-      <version>0.6.0</version>
+      <artifactId>delta-core_2.12</artifactId>
+      <version>0.8.0</version>
       <scope>provided</scope>
     </dependency>
+<!--
     <dependency>
       <groupId>com.github.scopt</groupId>
-      <artifactId>scopt_2.11</artifactId>
+      <artifactId>scopt_2.12</artifactId>
       <version>4.0.0-RC2</version>
     </dependency>
+-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -100,7 +102,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>de.printus.edh.tracking.spark.PageInfoRefinementApp</mainClass>
+              <mainClass>com.trivadis.sample.spark.HashtagCountApp</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
