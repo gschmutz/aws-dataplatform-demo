@@ -65,7 +65,7 @@ object HashtagCountApp extends App {
       println("s3AccessKey=" + config.s3aAccessKey)
 
       // digital data object input
-      val tweetRawPath = "s3a://tweet-bucket/tweets/hourly/tweet-raw-v1"
+      val tweetRawPath = "s3a://tweet-bucket/tweets/hourly/tweet_raw_v1"
 
       // digital data object refined
       val hashtagCountPath = "s3a://tweet-bucket/usage-optimized/hashCountPerHour"

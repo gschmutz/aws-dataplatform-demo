@@ -5,8 +5,8 @@
   <version>1.0-SNAPSHOT</version>
   <inceptionYear>2020</inceptionYear>
   <properties>
-    <scala.version>2.12.12</scala.version>
-    <scala.compat.version>2.12.12</scala.compat.version>
+    <scala.version>2.12.10</scala.version>
+    <scala.compat.version>2.12.10</scala.compat.version>
     <scala.binary.version>2.12</scala.binary.version>
     <spark.version>3.0.1</spark.version>
   </properties>
@@ -54,13 +54,13 @@
       <version>0.8.0</version>
       <scope>provided</scope>
     </dependency>
-<!--
+
     <dependency>
       <groupId>com.github.scopt</groupId>
       <artifactId>scopt_2.12</artifactId>
-      <version>4.0.0-RC2</version>
+      <version>4.0.1</version>
     </dependency>
--->
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
