@@ -55,6 +55,11 @@ services:
       KSQL_CONFIG_DIR: /etc/ksql
       KSQL_KSQL_EXTENSION_DIR: /etc/ksqldb/ext/
       KSQL_JMX_OPTS: -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1095 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.rmi.port=1095
+
+      KSQL_SECURITY_PROTOCOL: SASL_SSL
+      KSQL_SASL_MECHANISM: PLAIN
+      KSQL_SASL_JAAS_CONFIG: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="T7LE2MDGT7JZO6WT" password="AxjHlY2X1RR6rOzhc+fRPn+yIGJ3v0vQq29EVQ5m+oWpEopIOSCQJgWoEJ6WbXtT";'
+
     volumes:
       - ./data-transfer:/data-transfer
       - ./plugins/ksql:/etc/ksqldb/ext
@@ -105,6 +110,10 @@ services:
       KSQL_CONFIG_DIR: /etc/ksql
       KSQL_KSQL_EXTENSION_DIR: /etc/ksqldb/ext/
       KSQL_JMX_OPTS: -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1095 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.rmi.port=1095
+
+      KSQL_SECURITY_PROTOCOL: SASL_SSL
+      KSQL_SASL_MECHANISM: PLAIN
+      KSQL_SASL_JAAS_CONFIG: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="T7LE2MDGT7JZO6WT" password="AxjHlY2X1RR6rOzhc+fRPn+yIGJ3v0vQq29EVQ5m+oWpEopIOSCQJgWoEJ6WbXtT";'
     volumes:
       - ./data-transfer:/data-transfer
       - ./plugins/ksql:/etc/ksqldb/ext
