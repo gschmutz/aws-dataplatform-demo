@@ -19,12 +19,12 @@
       # External Services
       # ========================================================================
       external:
-          KAFKA_enable: false
-          KAFKA_bootstrap_servers:
+          KAFKA_enable: true
+          KAFKA_bootstrap_servers: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
           KAFKA_username:
           KAFKA_password:
-          SCHEMA_REGISTRY_enable: false
-          SCHEMA_REGISTRY_url:
+          SCHEMA_REGISTRY_enable: true
+          SCHEMA_REGISTRY_url: https://psrc-do01d.eu-central-1.aws.confluent.cloud
           S3_enable: true
           S3_endpoint: 
           S3_default_region: eu-central-1     
@@ -101,9 +101,9 @@
       #
       # ===== Confluent ksqlDB ========
       #
-      KAFKA_KSQLDB_enable: false
+      KAFKA_KSQLDB_enable: true
       KAFKA_KSQLDB_edition: 'oss'
-      KAFKA_KSQLDB_nodes: 1
+      KAFKA_KSQLDB_nodes: 2
       KAFKA_KSQLDB_internal_replication_factor: 1
       KAFKA_KSQLDB_suppress_enabled: false
       KAFKA_KSQLDB_suppress_buffer_size_bytes: -1

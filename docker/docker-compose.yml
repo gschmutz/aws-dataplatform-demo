@@ -8,6 +8,119 @@ networks:
   default:
     name: aws-demo-platform
 services:
+  #  ================================== ksqlDB ========================================== #
+  ksqldb-server-1:
+    image: confluentinc/ksqldb-server:0.15.0
+    hostname: ksqldb-server-1
+    container_name: ksqldb-server-1
+    labels:
+      com.platys.restapi.title: ksqlDB Server REST API
+      com.platys.restapi.url: http://${PUBLIC_IP}:8088
+    ports:
+      - 8088:8088
+      - 1095:1095
+    depends_on:
+      - schema-registry-1
+    environment:
+      KSQL_LOG4J_ROOT_LOGLEVEL: INFO
+      KSQL_LOG4J_OPTS: -Dlog4j.configuration=file:/etc/ksqldb/log4j.properties
+      KSQL_LOG4J_PROCESSING_LOG_BROKERLIST: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
+      KSQL_LOG4J_PROCESSING_LOG_TOPIC: demo_processing_log
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_NAME: demo_processing_log
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
+      # For Demo purposes: improve resource utilization and avoid timeouts
+      KSQL_KSQL_STREAMS_NUM_STREAM_THREADS: 1
+      KSQL_PRODUCER_ENABLE_IDEMPOTENCE: 'true'
+      KSQL_APPLICATION_ID: kafka-demo
+      KSQL_KSQL_SERVICE_ID: kafka-demo
+      KSQL_HOST_NAME: ksqldb-server-1
+      KSQL_LISTENERS: http://0.0.0.0:8088
+      KSQL_BOOTSTRAP_SERVERS: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
+      KSQL_CACHE_MAX_BYTES_BUFFERING: 0
+      KSQL_RESPONSE_HTTP_HEADERS_CONFIG: ''
+      #KSQL_SECURITY_PROTOCOL: SASL_SSL
+      #KSQL_SASL_MECHANISM: PLAIN
+      #KSQL_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="None" password="None";
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry-1:8081
+      KSQL_KSQL_INTERNAL_TOPIC_REPLICAS: 1
+      KSQL_KSQL_STREAMS_REPLICATION_FACTOR: 1
+      KSQL_KSQL_QUERY_PULL_METRICS_ENABLED: 'true'
+      KSQL_KSQL_HIDDEN_TOPICS: ^_.*,default_ksql_processing_log
+#      KSQL_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+#      KSQL_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      KSQL_KSQL_SUPPRESS_ENABLED: 'False'
+      KSQL_KSQL_SUPPRESS_BUFFER_SIZE_BYTES: '-1'
+      KSQL_CONFIG_DIR: /etc/ksql
+      KSQL_KSQL_EXTENSION_DIR: /etc/ksqldb/ext/
+      KSQL_JMX_OPTS: -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1095 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.rmi.port=1095
+    volumes:
+      - ./data-transfer:/data-transfer
+      - ./plugins/ksql:/etc/ksqldb/ext
+    restart: unless-stopped
+  ksqldb-server-2:
+    image: confluentinc/ksqldb-server:0.15.0
+    hostname: ksqldb-server-2
+    container_name: ksqldb-server-2
+    labels:
+      com.platys.restapi.title: ksqlDB Server REST API
+      com.platys.restapi.url: http://${PUBLIC_IP}:8089
+    ports:
+      - 8089:8088
+      - 1096:1095
+    depends_on:
+      - schema-registry-1
+    environment:
+      KSQL_LOG4J_ROOT_LOGLEVEL: INFO
+      KSQL_LOG4J_OPTS: -Dlog4j.configuration=file:/etc/ksqldb/log4j.properties
+      KSQL_LOG4J_PROCESSING_LOG_BROKERLIST: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
+      KSQL_LOG4J_PROCESSING_LOG_TOPIC: demo_processing_log
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_NAME: demo_processing_log
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
+      # For Demo purposes: improve resource utilization and avoid timeouts
+      KSQL_KSQL_STREAMS_NUM_STREAM_THREADS: 1
+      KSQL_PRODUCER_ENABLE_IDEMPOTENCE: 'true'
+      KSQL_APPLICATION_ID: kafka-demo
+      KSQL_KSQL_SERVICE_ID: kafka-demo
+      KSQL_HOST_NAME: ksqldb-server-2
+      KSQL_LISTENERS: http://0.0.0.0:8088
+      KSQL_BOOTSTRAP_SERVERS: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
+      KSQL_CACHE_MAX_BYTES_BUFFERING: 0
+      KSQL_RESPONSE_HTTP_HEADERS_CONFIG: ''
+      #KSQL_SECURITY_PROTOCOL: SASL_SSL
+      #KSQL_SASL_MECHANISM: PLAIN
+      #KSQL_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="None" password="None";
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry-1:8081
+      KSQL_KSQL_INTERNAL_TOPIC_REPLICAS: 1
+      KSQL_KSQL_STREAMS_REPLICATION_FACTOR: 1
+      KSQL_KSQL_QUERY_PULL_METRICS_ENABLED: 'true'
+      KSQL_KSQL_HIDDEN_TOPICS: ^_.*,default_ksql_processing_log
+#      KSQL_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+#      KSQL_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      KSQL_KSQL_SUPPRESS_ENABLED: 'False'
+      KSQL_KSQL_SUPPRESS_BUFFER_SIZE_BYTES: '-1'
+      KSQL_CONFIG_DIR: /etc/ksql
+      KSQL_KSQL_EXTENSION_DIR: /etc/ksqldb/ext/
+      KSQL_JMX_OPTS: -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1095 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.rmi.port=1095
+    volumes:
+      - ./data-transfer:/data-transfer
+      - ./plugins/ksql:/etc/ksqldb/ext
+    restart: unless-stopped
+  # Access the cli by running:
+  # > docker exec -it ksqldb-cli ksql http://ksqldb-server-1:8088
+  ksqldb-cli:
+    image: confluentinc/ksqldb-cli:0.15.0
+    container_name: ksqldb-cli
+    hostname: ksqldb-cli
+    depends_on:
+      - ksqldb-server-1
+    volumes:
+      - ./data-transfer:/data-transfer
+    entrypoint: /bin/sh
+    tty: true
   #  ================================== Apache Spark 2.x ========================================== #
   spark-master:
     image: trivadis/apache-spark-master:3.0.1-hadoop3.2
@@ -215,8 +328,6 @@ services:
       - 18630:18630
     environment:
       SDC_OFFSET_DIRECTORY: /data/custom-offset-el
-      SDC_INSTALL_STAGES: streamsets-datacollector-apache-kafka_2_6-lib,streamsets-datacollector-aws-lib,streamsets-datacollector-azure-lib,streamsets-datacollector-groovy_2_4-lib,streamsets-datacollector-jdbc-lib
-      SDC_INSTALL_ENTERPRISE_STAGES: ''
       SDC_JAVA_OPTS: -Xmx2g -Xms2g
       SDC_JAVA8_OPTS: -XX:+UseG1GC
       SDC_CONF_MONITOR_MEMORY: 'true'
