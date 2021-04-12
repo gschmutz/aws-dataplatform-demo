@@ -21,8 +21,6 @@
       external:
           KAFKA_enable: true
           KAFKA_bootstrap_servers: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
-          KAFKA_username:
-          KAFKA_password:
           SCHEMA_REGISTRY_enable: true
           SCHEMA_REGISTRY_url: https://psrc-do01d.eu-central-1.aws.confluent.cloud
           S3_enable: true

@@ -19,8 +19,6 @@ services:
     ports:
       - 8088:8088
       - 1095:1095
-    depends_on:
-      - schema-registry-1
     environment:
       KSQL_LOG4J_ROOT_LOGLEVEL: INFO
       KSQL_LOG4J_OPTS: -Dlog4j.configuration=file:/etc/ksqldb/log4j.properties
@@ -40,10 +38,12 @@ services:
       KSQL_BOOTSTRAP_SERVERS: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
       KSQL_CACHE_MAX_BYTES_BUFFERING: 0
       KSQL_RESPONSE_HTTP_HEADERS_CONFIG: ''
-      #KSQL_SECURITY_PROTOCOL: SASL_SSL
-      #KSQL_SASL_MECHANISM: PLAIN
-      #KSQL_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="None" password="None";
-      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry-1:8081
+      KSQL_SECURITY_PROTOCOL: SASL_SSL
+      KSQL_SASL_MECHANISM: PLAIN
+      KSQL_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="${PLATYS_KAFKA_USERNAME:?PLATYS_KAFKA_USERNAME must be set either in .env or as an environment variable}" password="${PLATYS_KAFKA_PASSWORD:?PLATYS_KAFKA_PASSWORD must be set either in .env or as an environment variable}";
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: https://psrc-do01d.eu-central-1.aws.confluent.cloud
+      KSQL_KSQL_SCHEMA_REGISTRY_BASIC_AUTH_CREDENTIALS_SOURCE: USER_INFO
+      KSQL_KSQL_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: ${PLATYS_SCHEMA_REGISTRY_USERNAME:?PLATYS_SCHEMA_REGISTRY_USERNAME must be set either in .env or as an environment variable}:${PLATYS_SCHEMA_REGISTRY_PASSWORD:?PLATYS_SCHEMA_REGISTRY_PASSWORD must be set either in .env or as an environment variable}
       KSQL_KSQL_INTERNAL_TOPIC_REPLICAS: 3
       KSQL_KSQL_STREAMS_REPLICATION_FACTOR: 3
       KSQL_KSQL_QUERY_PULL_METRICS_ENABLED: 'true'
@@ -69,8 +69,6 @@ services:
     ports:
       - 8089:8088
       - 1096:1095
-    depends_on:
-      - schema-registry-1
     environment:
       KSQL_LOG4J_ROOT_LOGLEVEL: INFO
       KSQL_LOG4J_OPTS: -Dlog4j.configuration=file:/etc/ksqldb/log4j.properties
@@ -90,10 +88,12 @@ services:
       KSQL_BOOTSTRAP_SERVERS: pkc-lq8v7.eu-central-1.aws.confluent.cloud:9092
       KSQL_CACHE_MAX_BYTES_BUFFERING: 0
       KSQL_RESPONSE_HTTP_HEADERS_CONFIG: ''
-      #KSQL_SECURITY_PROTOCOL: SASL_SSL
-      #KSQL_SASL_MECHANISM: PLAIN
-      #KSQL_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="None" password="None";
-      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry-1:8081
+      KSQL_SECURITY_PROTOCOL: SASL_SSL
+      KSQL_SASL_MECHANISM: PLAIN
+      KSQL_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="${PLATYS_KAFKA_USERNAME:?PLATYS_KAFKA_USERNAME must be set either in .env or as an environment variable}" password="${PLATYS_KAFKA_PASSWORD:?PLATYS_KAFKA_PASSWORD must be set either in .env or as an environment variable}";
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: https://psrc-do01d.eu-central-1.aws.confluent.cloud
+      KSQL_KSQL_SCHEMA_REGISTRY_BASIC_AUTH_CREDENTIALS_SOURCE: USER_INFO
+      KSQL_KSQL_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: ${PLATYS_SCHEMA_REGISTRY_USERNAME:?PLATYS_SCHEMA_REGISTRY_USERNAME must be set either in .env or as an environment variable}:${PLATYS_SCHEMA_REGISTRY_PASSWORD:?PLATYS_SCHEMA_REGISTRY_PASSWORD must be set either in .env or as an environment variable}
       KSQL_KSQL_INTERNAL_TOPIC_REPLICAS: 3
       KSQL_KSQL_STREAMS_REPLICATION_FACTOR: 3
       KSQL_KSQL_QUERY_PULL_METRICS_ENABLED: 'true'
