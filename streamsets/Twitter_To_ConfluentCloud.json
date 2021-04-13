@@ -5,7 +5,7 @@
     "pipelineId" : "TwitterTob9f0344e-9eee-4964-83e9-bebad1ff97c8",
     "title" : "Twitter_To_ConfluentCloud",
     "description" : "",
-    "uuid" : "f3140878-3b6b-422c-8dc2-7a4effab6e33",
+    "uuid" : "e22a90a0-0e55-4241-90db-1a6345054394",
     "configuration" : [ {
       "name" : "executionMode",
       "value" : "STANDALONE"
@@ -1003,7 +1003,7 @@
         "name" : "expressionProcessorConfigs",
         "value" : [ {
           "fieldToSet" : "/timestamp_ms_iso",
-          "expression" : "${time:extractStringFromDate( time:millisecondsToDateTime( record:value('/timestamp_ms')), \"yyyy-MM-dd'T'hh:MM:ss\")}"
+          "expression" : "${time:extractStringFromDate( time:millisecondsToDateTime( record:value('/timestamp_ms')), \"yyyy-MM-dd'T'HH:mm:ss\")}"
         } ]
       }, {
         "name" : "headerAttributeConfigs",
@@ -1269,11 +1269,11 @@
       "title" : "Twitter_To_ConfluentCloud",
       "description" : "",
       "created" : 1618259543391,
-      "lastModified" : 1618320999629,
+      "lastModified" : 1618321377051,
       "creator" : "admin",
       "lastModifier" : "admin",
       "lastRev" : "0",
-      "uuid" : "f3140878-3b6b-422c-8dc2-7a4effab6e33",
+      "uuid" : "e22a90a0-0e55-4241-90db-1a6345054394",
       "valid" : true,
       "metadata" : {
         "labels" : [ ]
