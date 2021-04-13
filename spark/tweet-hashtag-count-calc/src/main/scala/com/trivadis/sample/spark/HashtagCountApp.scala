@@ -61,7 +61,7 @@ object HashtagCountApp extends App {
       println("month=" + config.month)
       println("day=" + config.day)
       println("hour=" + config.hour)
-      println("s3aEndopoint=" + config.s3aEndpoint)
+      println("s3aEndpoint=" + config.s3aEndpoint)
       println("s3AccessKey=" + config.s3aAccessKey)
 
       // digital data object input
